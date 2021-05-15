@@ -1,5 +1,20 @@
-type Todo @model {
-  id: ID!
-  name: String!
-  description: String
+type TestTable @model
+@key(fields: ["hashKey", "rangeKey"])
+{
+  hashKey: String!
+  rangeKey: String!
+
+  username: String
+  email: String
+  address: String
+
+  title: String
+  content: String
 }
+
+# 公用数据模型
+# 实体               HASH                          RANGE
+# User              USER#<USERNAME>               #METADATA#<USERNAME>
+# Photo             USER#<USERNAME>               PHOTO#<USERNAME>#<TIMESTAMP>
+# Reaction          REACTION#<USERNAME>#<TYPE>    PHOTO#<USERNAME>#<TIMESTAMP>
+# Friendship        USER#<USERNAME>               #FRIEND#<FRIEND_USERNAME>
